@@ -115,16 +115,18 @@ Warrior.prototype.getCode = function (){
  * Если призываемый объект не является ситхом, выкидывается исключение.
  */
 Jedi.prototype.toLightSide = function(sith) {
-        if(sith.sideOfForce === "light"){
-                throw new Error("Invalid argument");
-        }else{
-                if(this.level > sith.level){
-                        sith.sideOfForce = "light";
-                }else{
-                        if(this.level < sith.level){
-                                this.sideOfForce = "dark";
-                        }
-                }
+   if(sith.sideOfForce === "light"){
+         throw new Error("Invalid argument");
+    }
+	else{
+        if(this.level > sith.level){
+	        sith.sideOfForce = "light";
+        }
+		else{
+            if(this.level < sith.level){
+                this.sideOfForce = "dark";
+            }
+        }
         }
 };
 
