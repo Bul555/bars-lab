@@ -41,7 +41,7 @@
 
 /**
  * Задание 1. Создать функцию factorial для подсчета факториала. Функция в качестве параметра
- * принимает целое число. Результатом выполнения будет факториал (произведение всех чисел,
+ * принимает целое чило. Результатом выполнения будет факториал (произведение всех чисел,
  * начиная с 1 до самого числа включительно) этого числа.
  *
  * @example
@@ -52,7 +52,16 @@
  * 
  * @return {Number} факториал числа.
  */
-
+ function factorial(n) {	
+ 	function isNumber(n){
+ 		return (typeof n === "number")
+	}
+	 
+    if(!isNumber(n)){
+ 		throw new Error("Invalid arguments");
+	}
+ 	return n? factorial(n-1)*n :1;
+}
 /**
  * Задание 2. Создать функцию nfib для подсчета n-го числа Фибоначчи
  * (http://ru.wikipedia.org/wiki/Числа_Фибоначчи)
@@ -67,3 +76,18 @@
  *
  * @return {Number} Число Фибоначчи.
  */
+function nfib(n) {
+    var i, a = 0, b = 1;
+    function isNumber(t){
+ 		return (typeof n === "number")
+	}
+	 
+    if(!isNumber(n)){
+ 		throw new Error("Invalid arguments");
+    }
+	
+    for (i = 1; i < n; i++) {
+        b = a + (a = b);
+    }
+    return a;
+}

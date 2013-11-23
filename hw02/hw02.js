@@ -36,7 +36,8 @@ function Warrior(name, level){
  * @return {Number} Урон, наносимой атакой.
  */
 Warrior.prototype.attack = function() {
-  // Ваш код здесь...
+ 
+  return this.level*0.1;
 };
 
 /**
@@ -54,16 +55,25 @@ Warrior.prototype.attack = function() {
  * @param {Number} level Уровень джедая.
  */
 function Jedi (name, level) {
-  // Ваш код здесь...
+  this.name=name;
+  this.level=level
+  
 }
+Jedi.prototype=new Warrior();
+Jedi.prototype.sideOfForce="light";
+
 
 /**
  * Создает экземпляр ситха
  * @param {String} name Имя ситха.
  * @param {Number} level Уровень ситха.
  */
-// Ваш код здесь...
-
+function Sith(name, level){
+this.name=name;
+this.level=level;
+}
+Sith.prototype= new Warrior();
+Sith.prototype.sideOfForce="dark"
 
 /**
  * Метод произнесения кодекса.
@@ -72,7 +82,15 @@ function Jedi (name, level) {
  * @name Warrior.getCode
  * @return {String} Кодекс воина.
  */
-// Ваш код здесь...
+
+Warrior.prototype.getCode = function (){
+    if (this.sideOfForce == "dark")
+    
+	return "Спокойствие-ложь,есть только страсть..."
+	else
+	return "Нет волнения,есть покой..."
+}
+
 
 
 /**
@@ -96,7 +114,21 @@ function Jedi (name, level) {
  * @throws Error("Invalid argument")
  * Если призываемый объект не является ситхом, выкидывается исключение.
  */
-// Ваш код здесь...
+Jedi.prototype.toLightSide = function(sith) {
+        if(sith.sideOfForce === "light"){
+                throw new Error("Invalid argument");
+        }else{
+                if(this.level > sith.level){
+                        sith.sideOfForce = "light";
+                }else{
+                        if(this.level < sith.level){
+                                this.sideOfForce = "dark";
+                        }
+                }
+        }
+};
+
+
 
 
 /**
@@ -117,4 +149,19 @@ function Jedi (name, level) {
  * @throws Error("Invalid argument")
  * Если призываемый объект не является джедаем, выкидывается исключение.
  */
-// Ваш код здесь...
+
+Sith.prototype.toDarkSide = function(jedi) {
+   if(jedi.sideOfForce === "dark"){
+        throw new Error("Invalid argument");
+    }
+	else{
+        if(this.level > jedi.level){
+             jedi.sideOfForce = "dark";
+        }
+		else{
+            if(this.level < jedi.level){
+            this.sideOfForce = "light";
+            }
+        }
+        }
+};

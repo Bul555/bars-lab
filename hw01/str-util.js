@@ -25,6 +25,8 @@
  * @return {String} отформатированная строка.
  */
 
+
+ 
 /**
  * Задание 2. Создать функцию repeat.
  *
@@ -43,7 +45,27 @@
  *
  * @return {String} Строка с повотрениями.
  */
-
+ function repeat(str, count, sep) {
+     var  res = "";
+     var qwe;
+    if(sep!=null){
+     qwe=str+ sep;
+	}
+	else{
+	    qwe=str;
+	}
+    while(count>0){
+	    if(count==1){
+	        res=res+str
+        }	
+	    else{
+	    res=res+qwe;
+	    }
+	count--;
+	}
+    return res;
+}
+	
 /**
  * Задание 3. Создать функцию toGetParams, формирующую из
  * объекта строку параметров для GET-запроса.
@@ -56,7 +78,23 @@
  *
  * @return {String} строка параметров.
  */
-
+function toGetParams(obj)
+ {
+ var res="";
+ 
+ for(var key in obj)
+ {
+ 
+ if(res == ""){
+  res=  key + "=" + obj[key];
+ }
+ else{
+  res=res + "&" + key + "=" + obj[key];
+    }
+ }
+ return res;
+ 
+ }
 /**
  * Задание 4. Создать функцию formatUrl, формирующую из базового url и объекта
  * строку GET-запроса.
@@ -72,7 +110,9 @@
  *
  * @return {String} сформированный url.
  */
-
+function formatUrl(url, obj){
+        return url+"?"+toGetParams(obj);
+}
 /**
  * Задание 5. Создать функцию startsWith, возвращающая true, если строка, переданная
  * в качестве первого аргумента начинается со строки, переданной в качестве второго аргумента,
@@ -90,7 +130,14 @@
  *
  * @return {Boolean} Результат проверки.
  */
+function startsWith(str, prefix)
+ {
+ if(str.indexOf(prefix) === 0)
+ return true;
+ else
+ return false;
 
+ }
 /**
  * Задание 6. Создать функцию endsWith, возвращающая true, если строка, переданная
  * в качестве первого аргумента оканчивается на строку, переданную в качестве второго аргумента,
@@ -104,7 +151,14 @@
  * Строка для проверки.
  *
  * @param {String} suffix
- * Строка - кандидат на роль суффикса.
+ * Строак - кандидат на роль суффикса.
  *
  * @return {Boolean} Результат проверки.
  */
+ function endsWith(str, suffix){
+ if(str.substring(str.length - suffix.length) === suffix)
+ return true;
+ 
+ else
+return false;
+ }
