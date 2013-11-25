@@ -56,13 +56,11 @@ Warrior.prototype.attack = function() {
  */
 function Jedi (name, level) {
   this.name=name;
-  this.level=level
+  this.level=level;
   
 }
 Jedi.prototype=new Warrior();
 Jedi.prototype.sideOfForce="light";
-
-
 /**
  * Создает экземпляр ситха
  * @param {String} name Имя ситха.
@@ -84,11 +82,12 @@ Sith.prototype.sideOfForce="dark"
  */
 
 Warrior.prototype.getCode = function (){
-    if (this.sideOfForce == "dark")
-    
-	return "Спокойствие-ложь,есть только страсть..."
-	else
-	return "Нет волнения,есть покой..."
+    if (this instanceof Sith){
+	return 'Спокойствие-ложь,есть только страсть...'
+	}
+	else{
+	return 'Нет волнения,есть покой...'
+	}
 }
 
 
