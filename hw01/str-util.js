@@ -24,7 +24,19 @@
  *
  * @return {String} отформатированная строка.
  */
-
+function format(token){
+        var i;
+    if(typeof token === "string"){
+        for(i = 0; token.indexOf("{" + i + "}") > -1; i++){
+            if(i >= arguments.length - 1){
+                throw new Error("Invalid arguments count");
+                }
+         token = token.replace("{" + i + "}", arguments[i+1]);
+        }
+    return token;
+        }
+    throw new Error("Invalid arguments count");
+}
 
  
 /**
