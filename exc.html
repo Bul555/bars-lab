@@ -1,0 +1,43 @@
+<html>
+<body>
+
+<div id='Excel'>
+</div>
+<script>
+var cellRow=1; 
+function CrTab(){
+var table = document.getElementById('Excel');
+table.innerHTML = table.innerHTML + '<table id="table"  border="2" width=100% bordercolor="red" ><table>';
+
+}
+
+
+function addRow(){
+	
+var str=new String("<tr>");
+var table=document.getElementById('table');
+for(var j=0;j<cellRow; j++){
+ str += '<td contenteditable="true" width=100/cellRow> </td>';
+}
+str+='</tr>';
+table.innerHTML +=str;
+
+}
+
+  function addCol() {
+ var kolcell=document.getElementsByTagName('TR');
+ for( var i=0; i<kolcell.length; i++){
+  kolcell[i].innerHTML += '<td contenteditable="true" width=100/cellRow> </td>'; 
+}
+  cellRow++;
+
+}
+
+
+</script>
+<input onclick="CrTab()" type=button value="CreateTable" />
+<input onclick="addRow()" type= button value="AddRow">
+<input onclick="addCol()" type= button value="AddColumn">
+
+</body>
+</html>
