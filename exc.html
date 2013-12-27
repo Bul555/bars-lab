@@ -17,7 +17,7 @@ function addRow(){
 var str=new String("<tr>");
 var table=document.getElementById('table');
 for(var j=0;j<cellRow; j++){
- str += '<td contenteditable="true" width=100/cellRow> </td>';
+ str += '<td  height=30 width=100/cellRow  ondblclick="writeMe(this)"> </td>';
 }
 str+='</tr>';
 table.innerHTML +=str;
@@ -27,13 +27,23 @@ table.innerHTML +=str;
   function addCol() {
  var kolcell=document.getElementsByTagName('TR');
  for( var i=0; i<kolcell.length; i++){
-  kolcell[i].innerHTML += '<td contenteditable="true" width=100/cellRow> </td>'; 
+  kolcell[i].innerHTML += '<td  width=100/cellRow ondblclick="writeMe(this)"> </td>'; 
 }
   cellRow++;
 
 }
+function writeMe(a){
+    a.setAttribute('contenteditable', 'true');
+    a.setAttribute('autofocus');
+    a.setAttribute('onblur','oRead(this)');
+}
 
+function oRead(a){
+    a.setAttribute('contenteditable', 'false');
+    a.removeAttribute('onblur');
+    a.removeAttribute('autofocus');
 
+}
 </script>
 <input onclick="CrTab()" type=button value="CreateTable" />
 <input onclick="addRow()" type= button value="AddRow">
