@@ -1,3 +1,29 @@
+
+function Odin(){}
+Odin.define = function(a,b){
+    window[a] = function(){
+        for(var i in b.fields){
+            this[i] = b.fields[i];
+        }
+        for(var i in b.methods){
+            this[i] = b.methods[i];
+        }
+    }
+    for(var i in b.staticFields){
+        window[a][i] = b.staticFields[i];
+    }
+    for(var i in b.staticMethods){
+        window[a][i] = b.staticMethods[i];
+    }
+
+}
+Odin.create = function(a,b){
+    var myObj = new window[a];
+    for(var i in b){
+        myObj[i] = b[i];
+    }
+    return myObj;
+}
 /**
  * Odin - библиотека, добавляющая в javascript ООП в схожем с ООП-языками виде.
  * Позволяет определять классы, добавлять поля, методы (экземпляра и статические),
