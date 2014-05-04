@@ -1,117 +1,186 @@
-/**
- * hulk - библиотека для манипуляции DOMом.
- * Ниже описаны функции, которые должны присутствовать в данной библиотеке.
- * Реализовать hulk таким образом, чтобы можно было вызывать цепочку функций:
- * @example hulk.select('some-selector').addClass('cls').append('div')
- */
 
-/**
- * @method select
- * Функция, с которой начинается манипуляция dom-объектов.
- * Возвращает hulk-объект, который содержит массив html-элементов, удовлетворяющих переданному селектору.
- * Все дальнейшие манипуляции из цепочки вызовов будут применены к элементам из данной выборки.
- * @param {String} selector css-селектор.
- */
+var hulk = { 
+ 	element: undefined,
 
-/**
- * @method addClass
- * Добавляет классы каждому элементу выборки.
- * @param {String} clsNames Имена классов, разделенных пробелом.
- */
+ 	select: function(selector) {
 
-/**
- * @method append
- * Добавляет дочерний html-элемент каждому элементу выборки.
- * @param {String} Имя тега, добавляемого элемента.
- */
+ 		this.element = document.querySelectorAll(selector);
 
-/**
- * @method attr Если при вызове передается один аргумент, возвращается значение атрибута,
- * если передается два аргумента, то атрибуту присваивается значение второго аргумента.
- * @param {String} attrName Имя атрибута.
- * @param {Number/String} [value] Значение атрибута.
- */
+ 		return this;
+ 	},
 
-/**
- * @method children
- * Возвращает всех непосредственных наследников первого элемента из выборки, обернутых в hulk-объект.
- */
+ 	addClass: function(clsNames) {
 
-/**
- * @method css Если при вызове передается один аргумент, возвращается значение css-атрибута,
- * если передается два аргумента, то css-атрибуту присваивается значение второго аргумента.
- * @param {String} cssAttrName Имя css-атрибута.
- * @param {Number/String} value Значение css-атрибута.
- */
+ 		for(var i = 0; i < this.element.length; i++) {
+ 			{
+	 			this.element[i].className += " " + clsNames;
+	 		}
+ 		
+ 		
+ 	},
 
-/**
- * @method empty
- * Очищает все внутреннее содержимое элементов из выборки.
- */
+ 	append: function(tag) {
 
-/**
- * @method find
- * Производит выборку по дочерним элементам выборки, удовлетворяющим переданному селектору.
- * @param {String} selector css-селектор для выборки.
- */
+ 		for(var i = 0; i < this.element.length; i++) {
+ 			this.element[i].appendChild(document.createElement(tag));
+ 		}
 
-/**
- * @method hasClass
- * Проверяет наличие класса для элементов выборки.
- * @param {String} className Имя класса, наличие которого проверяется.
- * @return {Boolean} Возвращает true, если все элементы выборки содержат переданный класс.
- */
+ 	
+ 	},
 
-/**
- * @method html
- * Возвращает html-содержимое первого элемента выборки.
- * @return {HTMLElement} html-содержимое первого элемента из выборки.
- */
+ 	attr: function() {
 
-/**
- * @method on
- * Добавляет подписчика на событие для элементов выборки.
- * @param {String} eventName Имя события, на которое будет производиться подписка.
- * @param {Function} func Функция-подписчик.
- */
+ 		if(arguments.length == 1) {
+ 			for(var i = 0; i < this.element.length; i++) {
+ 				console.log(this.element[i].getAttribute(arguments[0]));
+ 			}
+ 		}
+ 		else {
+ 			for(var i = 0; i < this.element.length; i++) {
+ 				this.element[i].setAttribute(arguments[0], arguments[1]);
+ 			}
+ 		}
 
-/**
- * @method parent
- * Возвращает родительский элемент первого элемента выборки.
- */
+ 	},
 
-/**
- * @method remove
- * Удаляет из документа все DOM-элементы выборки.
- */
+ 	children: function() {
+            
+        return  this.element[0].childNodes;
+ 	},
+   
 
-/**
- * @method removeAttr
- * Удаляет атрибут из элементов выборки.
- * @param {String} attrName Удаляемый атрибут.
- */
+ 	css: function() {
 
-/**
- * @method removeClass
- * Удаляет css-классы для элементов выборки.
- * @param {String} clsNames Имена классов, разделенных пробелом.
- */
+ 		if(arguments.length ==1) {
+ 			for(var i = 0; i < this.element.length; i++) {
+ 				 this.element[i].style.getPropertyValue(arguments[0]);
+ 		}
+ 		}
 
-/**
- * @method toggleClass
- * Добавляет (если классы отсутствуют) и удаляет (если классы присутствуют) у элементов выборки.
- * @param {String} clsNames Имена классов, разделенных пробелом.
- */
+ 		if(arguments.length == 2) {
+ 			for(var i = 0; i < this.element.length; i++) {
+ 			 this.element[i].style.setProperty(arguments[0],arguments[1]);
+ 			}
+ 		}
+ 	},
 
-/**
- * @method unbind
- * Удаляет подписчика на событие для элементов выборки.
- * @param {String} eventName Имя события, для которого будет производиться удаление подписчика.
- * @param {Function} func Удаляемая функция-подписчик.
- */
+ 	empty: function() {
 
-/**
- * @method wrap
- * Оборачивает каждый элемент выборки тегом, имя которого передано в качестве первого аргумента.
- * @param {String} tagName Имя тега.
- */
+ 		for(var i = 0; i < this.element.length; i++) {
+ 			
+ 				this.element[i].innerHTML="";
+ 			}
+
+ 	},
+
+ 	find: function(selector) {
+ 		
+ 		var a = [];
+        for(var i = 0;i< this.element.length;i++){
+            var el = this.element[i].querySelectorAll(selector);
+            for(var j = 0, j< el.length; j++){
+                a.push(el[j]);
+            }
+        }
+        return a;
+    }
+ 	
+ 	hasClass: function(className) {
+
+ 		for(var i = 0; i < this.element.length; i++) {
+ 			if(!this.element[i].className.match(className)) {
+ 				return false;
+ 			}
+ 		}
+ 		return true;
+ 	},
+
+ 	html: function() {
+ 	
+ 		return this.element[0].innerHTML;
+
+ 	},
+
+ 	on: function(eventName, func) {
+
+ 		for(var i = 0; i < this.element.length; i++) {
+ 			this.element[i].addEventListener(eventName, func;
+ 		}
+
+ 		return this;
+ 	},
+
+ 	parent: function() {
+
+ 		return this.element[0].parentNode;
+
+ 	},
+
+ 	remove: function() {
+
+ 		for(var i = 0; i< this.element.length; i++){
+            this.element[i].remove();
+        }
+    },
+
+ 	removeAttr: function(attrName) {
+
+ 		for(var i = 0; i < this.element.length; i++) {
+ 			this.element[i].removeAttribute(attrName);
+ 		}
+
+ 	
+ 	},
+
+ 	removeClass: function(clsNames) {
+    
+        var arr = clsNames.split(" ");
+         for(var i = 0; i< this.element.length; i++){
+			for(var j=0; j< arr.length; j++) 
+			{
+			this.element[i].className.replace(arr[j], '');
+		    }
+	    }
+	},
+		
+
+ 	toggleClass: function(clsNames) {
+ 		
+ 		var mas= clsNames.split(" ");
+ 		for(var i=0; i< this.element.length; i++)
+ 		{
+ 			 for( var j=0; j< mas.length; j++)
+ 		         if(this.element[i].className.match(mas[j]))
+ 		    {
+ 		   	this.element[i].className.replace(mas[j], '')
+ 		    }
+ 		     else
+ 		    {
+ 		   	 this.element[i].className += " " + mas[j];
+ 		    }
+
+ 		}
+ 	},
+
+ 	unbind: function(eventName, func) {
+
+ 		for(var i = 0; i < this.element.length; i++) {
+ 			this.elem[i].removeEventListener(eventName, func);
+ 		}
+
+ 		return this;
+ 	},
+
+ 	wrap: function(tagName) {
+
+ 		for(var i = 0; i < this.element.length;i++){
+			var newEl = document.createElement(tagName);
+			var parent = this.element[i].parentNode;
+	
+	        parent.appendChild(newEl);
+			newEl.appendChild(obj.arr[i]);
+						
+		}
+	 }
+ 	 
+};
