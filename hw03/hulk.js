@@ -19,6 +19,7 @@ var hulk = {
  		
  	},
 
+
  	append: function(tag) {
 
  		for(var i = 0; i < this.element.length; i++) {
