@@ -37,9 +37,67 @@ Ext.define('Lib.view.Main', {
           text: 'Добавить'
         }]
       }]
-    }, {
+    }, { 
       title: 'Авторы',
-      itemId: 'authors'
+      xtype: 'grid',
+      itemId: 'authors',
+      store: 'Author',
+      columns: [{
+        text: 'Имя',
+        dataIndex: 'first_name',
+        flex: 1
+      }, {
+        text: 'Фамилия',
+        dataIndex: 'last_name',
+        flex: 2
+      }, {
+        text: 'Отчество',
+        dataIndex: 'middle_name',
+        flex: 3
+      }],
+      dockedItems: [{
+        xtype: 'toolbar',
+        dock: 'top',
+        items: [{
+          xtype: 'button',
+          action: 'add',
+          text: 'Добавить'
+        
+    }]
+      }]
+    },
+    { 
+      title: 'Книги',
+      xtype: 'grid',
+      itemId: 'books',
+      store: 'Book',
+      columns: [{
+        text: 'Автор',
+        dataIndex: 'models.Authors',
+        flex: 4
+      }, 
+      
+      {
+      	text:'Название',
+        dataIndex: 'title',
+        flex: 7
+      },
+      {
+         text:'Жанр',
+         dataIndex:'models.Genre',
+         flex: 8
+
+      }],
+      dockedItems: [{
+        xtype: 'toolbar',
+        dock: 'top',
+        items: [{
+          xtype: 'button',
+          action: 'add',
+          text: 'Добавить'
+        
+    }]
+      }]
     }]
   }]
 });

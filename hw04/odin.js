@@ -1,33 +1,28 @@
-  function Odin () {}
- 	Odin.define =function(className, cfg){
- 		
- 		window[className] = cfg['constructor'];
- 		if(cfg.staticMethods){
- 			for(var i in cfg.staticMethods){
- 				window[className][i] = cfg.staticMethods[i];
- 			}
- 		}
- 		if(cfg.staticFields){
- 			for(var i in cfg.staticFields){
- 				window[className][i] = cfg.staticFields[i];
- 			}
- 		}
- 		if(cfg.fields){
- 			for(var i in cfg.fields){
- 				window[className].prototype[i] = cfg.fields[i];
- 			}
- 		}
- 		if(cfg.methods){
- 			for(var i in cfg.methods){
- 				window[className].prototype[i] = cfg.methods[i];
- 			
- 			}
- 		}
- 	},
- 	Odin.create = function(className, config){
- 		return new window[className](cfg);
- 	}
- }
+  function Odin(){}
+Odin.define = function(a,b){
+    window[a] = function(){
+        for(var i in b.fields){
+            this[i] = b.fields[i];
+        }
+        for(var i in b.methods){
+            this[i] = b.methods[i];
+        }
+    }
+    for(var i in b.staticFields){
+        window[a][i] = b.staticFields[i];
+    }
+    for(var i in b.staticMethods){
+        window[a][i] = b.staticMethods[i];
+    }
+
+}
+Odin.create = function(a,b){
+    var myObj = new window[a];
+    for(var i in b){
+        myObj[i] = b[i];
+    }
+    return myObj;
+}
 /**
  * Odin - библиотека, добавляющая в javascript ООП в схожем с ООП-языками виде.
  * Позволяет определять классы, добавлять поля, методы (экземпляра и статические),

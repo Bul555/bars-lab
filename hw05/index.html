@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
 	<meta charset="utf-8" />
 	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -10,9 +10,9 @@
     <script src="src/Controller.js"></script>
 	<link href="style.css" rel="stylesheet">
 </head>
-<body ng-app="fShop" >
+<body ng-controller="ItemsListCtrl" >
 
-<div class="wrapper" ng-controller="Itcontr">
+<div class="wrapper">
 
 	<header class="header">
 		<div class="logo">
@@ -26,7 +26,7 @@
 			<main class="content">
 				<ul class="items">
 					<li  ng-repeat="it in items">
-						<div class="item"  ng-Dblclick="push(it)">
+						<div class="item" ng-dblclick="push(it)">
 							<img ng-src="{{it.img}}">
 							<div class="item-name">{{it.name}}</div>
 							<div class="item-price">{{it.price}}</div>
@@ -40,10 +40,10 @@
 			<div class="basket">
 				<div class="basket-title">Корзина</div>
 					<ul>
-					<li  ng-repeat="it in itemsBasket" ng-Dblclick="pop(it)">
-						<div class="item" >
-							<p> {{it.name}} </p>
-							<p> {{it.price}}</p>
+					<li  ng-repeat="it in itemsBasket">
+						<div class="item" ng-dblclick="pop(it)">
+							<p>{{it.name}}</p>
+							<p>{{it.price}}</p>
 						</div>
 					</li>
 				</ul>

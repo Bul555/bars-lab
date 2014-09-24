@@ -22,6 +22,10 @@ Ext.define('Lib.view.NavigationTree', {
             text: "Авторы",
             leaf: true,
             tabId: 'authors'
+          }, {
+            text: "Книги",
+            leaf: true,
+            tabId: 'books'
           }]
         }
       });
